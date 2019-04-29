@@ -4,7 +4,8 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Manager
+  - GManagerTag
+  - GLoopManagerTag
   layers:
   - Default
   - TransparentFX
