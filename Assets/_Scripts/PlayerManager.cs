@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using Random = UnityEngine.Random;
+
+
 /* This script will take care of multiple things
  * 1. Taking track of how many players are playing [Less than 3 players should will result in a block]
  * 2. Managing the player's turnorder
@@ -11,37 +14,43 @@ using UnityEngine;
 public class PlayerManager : MonoBehaviour
 {
     private bool check1, check2, check3, check4 = false;
-
-    public bool playerSelectScreen;
-    public bool player1, player2, player3, player4;
-    public int playersPresent;
-
     private bool endTurn;
-    public int turnOrder;
+    public bool player1, player2, player3, player4;
+    private int basePlayersRefference; // refference of how many players are in-game
+
+    [Header("Game States")]
+    public bool playerSelectScreen;
+    public bool finalizeToGameplay;
+
+    [Header("Debug info *Please set as private later*")]
+    public int playersPresent;
+    public int judgeSelect;
+    public int[] turn;
+
 
 
     private void Update()
     {
         if (playerSelectScreen == true)
         {
-            JankyPlayerCounter(playersPresent);
-            print("End Total: " + playersPresent);
-            playerSelectScreen = false;
-
-            //if (playersPresent < 3) { print("Sorry you need 3 or more players to continue playing."); }
-            //if (playersPresent == 3) { turnOrder = 3; }
-            //if (playersPresent == 4) { turnOrder = 4; } // Expand on later
-        }
-        else
-        {
-            //playerSelectScreen = false;
-            // Move into gameplay.
+            if (finalizeToGameplay == true)
+            {
+                JankyPlayerCounter(playersPresent);
+                basePlayersRefference = playersPresent;
+                judgeSelect = turn[Random.Range(0, turn.Length)];
+                print("End Total: " + playersPresent + ". Player " + judgeSelect + " is now the judge!");
+                playerSelectScreen = false;
+            }
         }
     }
-
-    // return two types
-
-    public int JankyPlayerCounter(int players)
+    public void ChooseOrder()
+    {
+        turn[3] = judgeSelect;
+        turn[0] = turn[Random.Range(0,2)];
+        turn[0] = turn[Random.Range(0,1)];
+        if (turn[1] == turn[0]) { }
+    }
+    public int JankyPlayerCounter(int players) //Look into when doing the player select.
     {
         for (int i = 0; i < 4; i++)
         {
@@ -85,11 +94,8 @@ public class PlayerManager : MonoBehaviour
                 }
             }
         }
-        print("We counted: " + players + " players in the jank");
+        print("We counted: " + players);
         playersPresent = players;
         return players;
     }
-
-
-
 }
