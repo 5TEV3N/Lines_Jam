@@ -13,18 +13,20 @@ using TMPro;
 
 public class LinesManager : MonoBehaviour
 {
-    public GameObject playerTextObjRefferenceContainer;
-    public GameObject playerLines1ObjRefferenceContainer;
-    
+    private PlayerManager playersReff;
+
     public bool roundRestart;
 
-    private PlayerManager playersReff;
-   
-    public string player1Line;
-    public string player2Line;
-    public string player3Line;
-    public string player4Line;
-    
+    [Header("Containers")]
+    public GameObject playerLinesObjRefferenceContainer;
+    public GameObject previousPlayerLinesObjRefferenceContainer;
+
+    [Header("Lines Section")]
+    public int charactersToBeShowned;
+    public string player1Line, player2Line, player3Line, player4Line;
+    public string player1LastCharacters, player2LastCharacters, player3LastCharacters, player4LastCharacters;
+
+
     private void Awake()
     {
         playersReff = GameObject.FindGameObjectWithTag("GManagerTag").GetComponent<PlayerManager>();
@@ -37,22 +39,48 @@ public class LinesManager : MonoBehaviour
         {
             string empty = "";
             player1Line = player2Line = player3Line = player4Line = empty;
-            playerLines1ObjRefferenceContainer.GetComponent<TMP_Text>().text = empty;
+            player1LastCharacters = player2LastCharacters = player3LastCharacters = player4LastCharacters = empty;
+            playerLinesObjRefferenceContainer.GetComponent<TMP_Text>().text = empty;
             roundRestart = false;
         }
+    }
 
-        // Debug
-        if (Input.GetKeyDown(KeyCode.Space))
+    public void SaveLine ()
+    {
+        if (playersReff.player1Turn == true)
         {
-            player1Line = playerTextObjRefferenceContainer.GetComponent<TMP_Text>().text;
-            playerLines1ObjRefferenceContainer.GetComponent<TMP_Text>().text = player1Line;
+            if (playersReff.player1IsJudge != true)
+            {
+                player1Line = playerLinesObjRefferenceContainer.GetComponent<TMP_Text>().text;
+                player1LastCharacters = player1Line.Substring(player1Line.Length - charactersToBeShowned);
+            }   
+        }
+
+        if (playersReff.player2Turn == true)
+        {
+            if (playersReff.player2IsJudge != true)
+            {
+                player2Line = playerLinesObjRefferenceContainer.GetComponent<TMP_Text>().text;
+                player2LastCharacters = player2Line.Substring(player2Line.Length - charactersToBeShowned);
+            }
+        }
+
+        if (playersReff.player3Turn == true)
+        {
+            if (playersReff.player3IsJudge != true)
+            {
+                player3Line = playerLinesObjRefferenceContainer.GetComponent<TMP_Text>().text;
+                player3LastCharacters = player3Line.Substring(player3Line.Length - charactersToBeShowned);
+            }
+        }
+
+        if (playersReff.player4Turn == true)
+        {
+            if (playersReff.player4IsJudge != true)
+            {
+                player4Line = playerLinesObjRefferenceContainer.GetComponent<TMP_Text>().text;
+                player4LastCharacters = player4Line.Substring(player4Line.Length - charactersToBeShowned);
+            }
         }
     }
-    /*
-    private bool isPlayerPlaying(bool playerStatus)
-    {
-
-        return false;
-    }
-    */
 }
