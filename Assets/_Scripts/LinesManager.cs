@@ -14,6 +14,7 @@ using TMPro;
 public class LinesManager : MonoBehaviour
 {
     private PlayerManager playersReff;
+    private string empty = "";
 
     public bool roundRestart;
 
@@ -37,10 +38,10 @@ public class LinesManager : MonoBehaviour
         // Start of a new round
         if (roundRestart == true)
         {
-            string empty = "";
             player1Line = player2Line = player3Line = player4Line = empty;
             player1LastCharacters = player2LastCharacters = player3LastCharacters = player4LastCharacters = empty;
             playerLinesObjRefferenceContainer.GetComponent<TMP_Text>().text = empty;
+            playersReff.judgeSelect = Random.Range(1, playersReff.numberOfPlayers);         
             roundRestart = false;
         }
     }
@@ -53,6 +54,7 @@ public class LinesManager : MonoBehaviour
             {
                 player1Line = playerLinesObjRefferenceContainer.GetComponent<TMP_Text>().text;
                 player1LastCharacters = player1Line.Substring(player1Line.Length - charactersToBeShowned);
+                playersReff.player1Turn = false;
             }   
         }
 
@@ -62,6 +64,7 @@ public class LinesManager : MonoBehaviour
             {
                 player2Line = playerLinesObjRefferenceContainer.GetComponent<TMP_Text>().text;
                 player2LastCharacters = player2Line.Substring(player2Line.Length - charactersToBeShowned);
+                playersReff.player2Turn = false;
             }
         }
 
@@ -71,6 +74,7 @@ public class LinesManager : MonoBehaviour
             {
                 player3Line = playerLinesObjRefferenceContainer.GetComponent<TMP_Text>().text;
                 player3LastCharacters = player3Line.Substring(player3Line.Length - charactersToBeShowned);
+                playersReff.player3Turn = false;
             }
         }
 
@@ -80,7 +84,10 @@ public class LinesManager : MonoBehaviour
             {
                 player4Line = playerLinesObjRefferenceContainer.GetComponent<TMP_Text>().text;
                 player4LastCharacters = player4Line.Substring(player4Line.Length - charactersToBeShowned);
+                playersReff.player4Turn = false;
             }
         }
+
+        playerLinesObjRefferenceContainer.GetComponent<TMP_Text>().text = empty;
     }
 }
