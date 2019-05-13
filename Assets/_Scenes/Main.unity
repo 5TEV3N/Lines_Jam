@@ -2448,6 +2448,7 @@ GameObject:
   - component: {fileID: 1443592794}
   - component: {fileID: 1443592796}
   - component: {fileID: 1443592795}
+  - component: {fileID: 1443592797}
   m_Layer: 0
   m_Name: GManager
   m_TagString: GManagerTag
@@ -2488,7 +2489,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1443592793}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aff3813ef6b8f58409b3655eee41a2d8, type: 3}
   m_Name: 
@@ -2505,6 +2506,34 @@ MonoBehaviour:
   player2IsJudge: 0
   player3IsJudge: 0
   player4IsJudge: 0
+--- !u!114 &1443592797
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1443592793}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50d6806a9e0552743a933996ecb476c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentPlayerTurnOrder:
+  - playerName: 
+    playerID: 0
+  - playerName: 
+    playerID: 0
+  - playerName: 
+    playerID: 0
+  - playerName: 
+    playerID: 0
+  totalPlayerCount: 4
+  currentPlayerJudge:
+    playerName: 
+    playerID: 0
+  previousPlayerJudge:
+    playerName: 
+    playerID: 0
 --- !u!1 &1898527574
 GameObject:
   m_ObjectHideFlags: 0
